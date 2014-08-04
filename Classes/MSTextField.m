@@ -214,28 +214,37 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.backgroundColor = [UIColor whiteColor];
-        [self setTextColor:[UIColor blackColor]];
-        [self setClearButtonMode:UITextFieldViewModeWhileEditing];
-        [[self layer] setCornerRadius:3.5f];
-        [self setLeftView:[MSTextField paddingView]];
-        [self setLeftViewMode:UITextFieldViewModeAlways];
-        [self setTextAlignment:NSTextAlignmentLeft];
-        [self setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-        
-        self.invalidInputBorderColor = UIColorFromRGB(0xB50000);
-        self.inputState = MSTextFieldUnknownInput;
-        self.minimumLengthToVerify = 1;
-        self.maxLengthOfInput = MAX_INPUT;
-
-        self.validInputImage = [UIImage imageNamed:@"green-checkmark"];
-        self.validInputImageView = [[UIImageView alloc] initWithImage:_validInputImage];
-        self.validInputImageView.frame = CGRectMake(self.frame.size.width - _validInputImage.size.width - 10, floorf((self.frame.size.height - _validInputImage.size.height)/2.0f), _validInputImage.size.width, _validInputImage.size.height);
-        self.validInputImageView.alpha = 0.0f;
-        [self addSubview:self.validInputImageView];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
+      [self setup];
     }
     return self;
+}
+
+- (void)awakeFromNib {
+  [super awakeFromNib];
+  [self setup];
+}
+
+- (void)setup {
+  self.backgroundColor = [UIColor whiteColor];
+  [self setTextColor:[UIColor blackColor]];
+  [self setClearButtonMode:UITextFieldViewModeWhileEditing];
+  [[self layer] setCornerRadius:3.5f];
+  [self setLeftView:[MSTextField paddingView]];
+  [self setLeftViewMode:UITextFieldViewModeAlways];
+  [self setTextAlignment:NSTextAlignmentLeft];
+  [self setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+  
+  self.invalidInputBorderColor = UIColorFromRGB(0xB50000);
+  self.inputState = MSTextFieldUnknownInput;
+  self.minimumLengthToVerify = 1;
+  self.maxLengthOfInput = MAX_INPUT;
+  
+  self.validInputImage = [UIImage imageNamed:@"green-checkmark"];
+  self.validInputImageView = [[UIImageView alloc] initWithImage:_validInputImage];
+  self.validInputImageView.frame = CGRectMake(self.frame.size.width - _validInputImage.size.width - 10, floorf((self.frame.size.height - _validInputImage.size.height)/2.0f), _validInputImage.size.width, _validInputImage.size.height);
+  self.validInputImageView.alpha = 0.0f;
+  [self addSubview:self.validInputImageView];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 }
 
 - (void)setInputState:(MSInputState)inputState
