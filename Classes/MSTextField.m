@@ -228,10 +228,8 @@
   self.backgroundColor = [UIColor whiteColor];
   [self setTextColor:[UIColor blackColor]];
   [self setClearButtonMode:UITextFieldViewModeWhileEditing];
-  [[self layer] setCornerRadius:3.5f];
   [self setLeftView:[MSTextField paddingView]];
   [self setLeftViewMode:UITextFieldViewModeAlways];
-  [self setTextAlignment:NSTextAlignmentLeft];
   [self setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
   
   self.invalidInputBorderColor = UIColorFromRGB(0xB50000);
